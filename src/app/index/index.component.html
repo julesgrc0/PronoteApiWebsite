@@ -1,0 +1,18 @@
+<div class="container" *ngIf="!isFormPassComplete">
+    <div id="connexion">
+      <h2>Pronote</h2>
+      <input #username (keyup)="UsernameChange(username.value)" type="text" autocomplete="off" placeholder="Nom d'utilisateur">
+      <input #password (keyup)="PasswordChange(password.value)" type="password"  autocomplete="off"placeholder="Mot de passe">
+      <p *ngIf="Invalid">Nom d'utilisateur ou mot de passe invalide !</p>
+      <button (click)="Submit(username.value,password.value)" [disabled]="isEmpty">suivant</button>
+    </div>
+</div>
+<div class="container" *ngIf="isFormPassComplete">
+  <div id="location">
+    <div *ngFor="let item of Etab">
+      <div class="card" *ngIf="item.url">
+        <button (click)="chose(item.nomEtab,item.url)">{{ item.nomEtab | titlecase }}</button>
+      </div>
+    </div>
+  </div>
+</div>

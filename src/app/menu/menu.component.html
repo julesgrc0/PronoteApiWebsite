@@ -1,0 +1,35 @@
+<div class="container">
+    <div class="topbar">
+        <div class="tab" *ngFor="let tab of type">
+            <button (click)="change(tab)">{{ tab }}</button>
+        </div>
+    </div>
+    <div class="content">
+        <div class="all">
+            <div class="abs" *ngFor="let item of All.absences">
+                <p>{{ item.subject | titlecase }}</p>
+                <i>{{ item.hoursAssisted }} cours présent</i>
+            </div>
+            <div class="inf" *ngFor="let item of All.infos">
+               <h3> {{item.title}} </h3>
+               <p> {{item.content}} </p>
+               <p *ngIf="item.files.length!==0">
+                   <a *ngFor="let file of item.files" href="{{file.url}}">{{file.name}}</a>
+               </p>
+            </div>
+            <div class="hom" *ngFor="let item of All.homeworks">
+               <p>{{ item.subject | titlecase }}</p>
+               <p>{{ item.description }}</p>
+            </div>
+            <div class="mar" *ngFor="let item of All.marks">
+                <p>{{ item.name | titlecase }}</p>
+               <p>{{ item.marks[0].min }}/{{ item.marks[0].scale }} < <span>{{ item.marks[0].value }}/{{ item.marks[0].scale }}</span> < {{ item.marks[0].max }}/{{ item.marks[0].scale }}</p>
+             </div>
+            <div class="wor" *ngFor="let item of All.timetable">
+                <p>{{item.subject | titlecase}} avec {{ item.teacher | titlecase }}</p>
+                <i>Salle {{item.room}}</i>
+                <span *ngIf="item.isCancelled || item.isAway">Annuler</span>
+            </div>
+        </div>
+    </div>
+</div>
